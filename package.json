@@ -1,0 +1,19 @@
+{
+  "name": "project_postaway",
+  "version": "1.0.0",
+  "description": "A backend Social Media API's  ",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Joewish.V",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "winston": "^3.13.0"
+  }
+}
