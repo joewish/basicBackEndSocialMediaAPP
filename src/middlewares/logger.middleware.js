@@ -14,23 +14,29 @@ export const errorLoggerMiddleware = async (err, req, res, next) => {
   const timestamp = new Date().toString();
     const reqUrl = req.originalUrl;
     const reqBody = JSON.stringify(req.body)
-    if(err){
-      if(err instanceof customErrorHandler) {
-        logger.error(`timestamp: ${timestamp},request Url: ${reqUrl},error message:${err.message}`);
-        next();
-        }else{
-          logger.error(`timestamp: ${timestamp},request Url: ${reqUrl},error message:Oops! Something went wrong... Please try again later!`);
+    if(!reqUrl.includes("/api/user")){
+      if(err){
+        if(err instanceof customErrorHandler) {
+          logger.error(`timestamp: ${timestamp},request Url: ${reqUrl},error message:${err.message}`);
           next();
+          }else{
+            logger.error(`timestamp: ${timestamp},request Url: ${reqUrl},error message:Oops! Something went wrong... Please try again later!`);
+            next();
+        }
+      }else{
+        logger.info(`timestamp: ${timestamp},request Url: ${reqUrl},message:${reqBody}`)
       }
-    }else{
-      logger.info(`timestamp: ${timestamp},request Url: ${reqUrl},message:${reqBody}`)
     }
+    next()
   
 };
 export const loggerMiddleware = async ( req, res, next) => {
   const timestamp = new Date().toString();
     const reqUrl = req.originalUrl;
     const reqBody = JSON.stringify(req.body)
+    if(!reqUrl.includes("/api/user")){
       logger.info(`timestamp: ${timestamp},request Url: ${reqUrl},message:${reqBody}`)  
       next()
+    }
+    next();
 };
