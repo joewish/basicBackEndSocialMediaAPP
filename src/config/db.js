@@ -4,7 +4,7 @@ const baseUrl = process.env.MONGODB || "0.0.0.0:27017";
 
 export const connectToDb = async () => {
   try {
-    await mongoose.connect(`mongodb://${baseUrl}/book`, {
+    await mongoose.connect(`mongodb://${baseUrl}/socialMedia`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

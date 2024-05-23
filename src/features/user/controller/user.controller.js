@@ -1,4 +1,4 @@
-import { addUser, confirmLogin } from "../model/user.model.js";
+import { addUser, confirmLogin } from "../repository/user.repository.js";
 import jwt from "jsonwebtoken";
 export const registerUser = (req, res, next) => {
   const userData = req.body;

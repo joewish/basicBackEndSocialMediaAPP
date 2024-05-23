@@ -1,14 +1,13 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-export const userCommentsSchema = new Schema({
+export const userCommentsSchema = mongoose.Schema({
   userID: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   postID: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Post', 
     required: true,
   },

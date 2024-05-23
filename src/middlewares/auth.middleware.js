@@ -1,15 +1,17 @@
 import jwt from "jsonwebtoken";
 
-const jwtAuth = (req, res, next) => {
+const jwtAuth = async (req, res, next) => {
   const { jwtToken } = req.cookies;
-  jwt.verify(jwtToken, "U5f89JccQPpiCtAQ", (err, decoded) => {
-    if (err) res.status(401).json({ success: false, msg: "login to continue" });
-    else {
-      const userPayload = decoded;
-      req.userId = userPayload.userId;
+  jwt.verify(jwtToken, "U5f89JccQPpiCtAQ", (err, data) => {
+    if (err) {
+      res.status(400).send("unauthorized! login to continue!");
+    } else {
+      // console.log("data is", data);
+      req._id = data._id;
+      req.user = data.user;
       next();
     }
   });
 };
 
-export default jwtAuth;
+export default jwtAuth

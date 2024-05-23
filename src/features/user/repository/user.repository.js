@@ -9,7 +9,7 @@ export const addUser = async (data) => {
     await newUser.save();
     return newUser;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };
 
@@ -20,7 +20,7 @@ export const confirmLogin = async (data) => {
     const user = await User.findOne({ email, password });
     return user;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };
 
@@ -30,6 +30,6 @@ export const getAllUsers = async () => {
     const users = await User.find();
     return users;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err);
   }
 };

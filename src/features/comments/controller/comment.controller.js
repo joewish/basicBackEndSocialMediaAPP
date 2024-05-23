@@ -1,5 +1,5 @@
 import {addComment,deleteComment,updateComment,getAllComments} from "../repository/comment.repository.js"
-import {customErrorHandler} from "../../middlewares/errorHandler.js"
+import {customErrorHandler} from "../../../../middlewares/errorHandler.js"
 
 
 export const getCommentById=(req,res,next)=>{
