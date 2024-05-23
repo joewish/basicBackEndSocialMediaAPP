@@ -27,6 +27,11 @@ export const userSchema = mongoose.Schema({
       },
       message: props => 'Password must be at least 8 characters long, contain at least one uppercase letter, one number, and not contain the username!'
     }
+  },
+  gender:{
+    type:String,
+    enum:['Male', 'Female']
+    ,required:true
   }
 }, { timestamps: true });
 

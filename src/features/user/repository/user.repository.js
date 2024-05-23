@@ -3,11 +3,10 @@ import { userSchema } from "../schema/user.schema.js";
 const User = mongoose.model("User",userSchema)
 // Add User
 export const addUser = async (data) => {
-  const { name, email, password } = data;
+  const { name, email, password,gender } = data;
   try {
-    const newUser = new User({ name, email, password });
-    await newUser.save();
-    return newUser;
+    const newUser = new User({ name, email, password,gender });
+    return await newUser.save();
   } catch (err) {
     throw new Error(err);
   }
@@ -17,8 +16,12 @@ export const addUser = async (data) => {
 export const confirmLogin = async (data) => {
   const { email, password } = data;
   try {
-    const user = await User.findOne({ email, password });
-    return user;
+    const user = await User.findOne({ email:email});
+    if(user.email === email&& user.password === password) {
+      return true;
+    }else{
+      return false;
+    }
   } catch (err) {
     throw new Error(err);
   }

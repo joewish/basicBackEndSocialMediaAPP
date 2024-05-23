@@ -1,13 +1,19 @@
+import { customErrorHandler } from "../../../middlewares/errorHandler.js";
 import { addUser, confirmLogin } from "../repository/user.repository.js";
 import jwt from "jsonwebtoken";
-export const registerUser = (req, res, next) => {
+export const registerUser = async (req, res, next) => {
   const userData = req.body;
+  try{
   if (userData) {
-    let user = addUser(userData);
+    let user = await addUser(userData);
+    console.log(user)
     res.status(201).send({ status: "success", user });
   } else {
     res.status(400).json({ status: "failure", msg: "invalid user details" });
   }
+}catch(err){
+  next(new customErrorHandler(400,err.message));
+}
 };
 
 export const loginUser = (req, res) => {
