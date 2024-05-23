@@ -1,12 +1,17 @@
-import {addComment,deleteComment,updateComment,getAllComments} from "../model/comment.model.js"
+import {addComment,deleteComment,updateComment,getAllComments} from "../repository/comment.repository.js"
+import {customErrorHandler} from "../../middlewares/errorHandler.js"
 
 
 export const getCommentById=(req,res,next)=>{
     const result=getAllComments(req.params.id)
+    try{
     if(result){
         res.status(200).send(result)
     }else{
         res.status(400).send({"success":false,"message":"Comment not found"})
+    }}
+    catch(err){
+        next(new customErrorHandler(400,err.message))
     }
     
 }

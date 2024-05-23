@@ -1,5 +1,7 @@
-import app from "./index.js";
+import server from "./index.js";
+import { connectToDb } from "./src/config/db.js";
 
-app.listen(3000, () => {
-  console.log("server is listening at port 3000");
+server.listen(3000, async () => {
+  await connectToDb();
+  console.log(`server is running at port 3000`);
 });
