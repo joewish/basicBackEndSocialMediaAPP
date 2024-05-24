@@ -36,3 +36,12 @@ export const getAllUsers = async () => {
     throw new Error(err);
   }
 };
+
+export const findUserByRequestId= async (userId) => {
+  try{
+    const user = await User.findOne({userId:userId});
+    return 
+  }catch(err){
+    throw new Error(err);
+  }
+}

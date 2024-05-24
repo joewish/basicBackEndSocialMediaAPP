@@ -1,12 +1,11 @@
 import { customErrorHandler } from "../../../middlewares/errorHandler.js";
-import { addUser, confirmLogin } from "../repository/user.repository.js";
+import { addUser, confirmLogin,findUserByRequestId} from "../repository/user.repository.js";
 import jwt from "jsonwebtoken";
 export const registerUser = async (req, res, next) => {
   const userData = req.body;
   try{
   if (userData) {
     let user = await addUser(userData);
-    console.log(user)
     res.status(201).send({ status: "success", user });
   } else {
     res.status(400).json({ status: "failure", msg: "invalid user details" });
@@ -16,8 +15,8 @@ export const registerUser = async (req, res, next) => {
 }
 };
 
-export const loginUser = (req, res) => {
-  let status = confirmLogin(req.body);
+export const loginUser = async(req, res) => {
+  let status = await confirmLogin(req.body);
   if (status) {
     const token = jwt.sign(
       { userId: status.id, userEmail: status.email },
@@ -33,3 +32,12 @@ export const loginUser = (req, res) => {
     res.status(400).json({ status: "failure", msg: "invalid user details" });
   }
 };
+
+export const logoutUser = async (req, res,next) => {
+  try{
+    const user = await findUserByRequestId(req._id);
+    res.status(200).json({message: {email: user.email,name:user.name}})
+  }catch(err){
+    next(new customErrorHandler(400,err.message));
+  }
+}
