@@ -32,7 +32,8 @@ export const userSchema = mongoose.Schema({
     type:String,
     enum:['Male', 'Female']
     ,required:true
-  }
+  },
+  avatar:{type:String}
 }, { timestamps: true });
 
 // Custom validation for password to ensure it does not contain the username

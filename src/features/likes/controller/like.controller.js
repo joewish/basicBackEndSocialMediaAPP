@@ -1,8 +1,8 @@
-import {getPostByID} from "../model/like.model.js"
+import {getLikesByID} from "../repository/like.repository.js"
 
 
 export const getPosts=(req, res, next) =>{
-    const result = getPostByID(req.params.postID)
+    const result = getLikesByID(req.params.postID)
     if(result){
         res.status(200).send({"success": false,"message":result})
     }else{

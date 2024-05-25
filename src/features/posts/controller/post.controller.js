@@ -1,4 +1,4 @@
-import {addPost,getPostByID,getPostByUserID,deletePostBypostID,updatePostByPostID,getALLPost} from "../model/post.model.js"
+import {addPost,getPostByID,getPostByUserID,deletePostBypostID,updatePostByPostID,getALLPost} from "../repository/posts.repository.js"
 
 export const getAllPosts=(req,res,next)=>{
     const result = getALLPost()
